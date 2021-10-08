@@ -1,9 +1,10 @@
 let page = document.getElementById("buttonDiv");
 let selectedClassName = "current";
-const presetButtonColors = ["#3aa757", "#e8453c", "#f9bb2d", "#4688f1"];
+const presetButtonColors = ["#3aa757", "#e8453c", "#f9bb2d"];
+//const presetHolidays = [["#3aa757", "halloween"], ["#e8453c", "thanksgiving"], ["#f9bb2d", "christmas"];
 
-// Reacts to a button click by marking marking the selected button and saving
-// the selection
+
+// Reacts to a button click by marking the selected button and saving the selection
 function handleButtonClick(event) {
   // Remove styling from the previously selected color
   let current = event.target.parentElement.querySelector(
@@ -26,7 +27,7 @@ function constructOptions(buttonColors) {
 
     // For each color we were provided…
     for (let buttonColor of buttonColors) {
-      // …crate a button with that color…
+      // …create a button with that color…
       let button = document.createElement("button");
       button.dataset.color = buttonColor;
       button.style.backgroundColor = buttonColor;

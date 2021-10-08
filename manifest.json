@@ -30,5 +30,10 @@
     "32": "/images/calendar_32.png",
     "48": "/images/calendar_48.png",
     "128": "/images/calendar_128.png"
+  },
+
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
   }
 }
