@@ -1,7 +1,4 @@
 
-//set value of selected holiday
-//let selectedHoliday = 'Halloween';
-
 //pick year dynamically
 const today = new Date();
 const currentYear = today.getFullYear()
@@ -9,10 +6,11 @@ const nextYear = currentYear + 1;
 
 //object that contains the holiday options
 const holidays = {
+    "Valentine's Day": 'February 14, ' + currentYear +' 00:00:00',
     Halloween: 'October 31, ' + currentYear +' 00:00:00',
     Thanksgiving: 'November 25, 2021 00:00:00',
     Christmas: 'December 25, ' + currentYear +' 00:00:00',
-    ptriGrad: 'June 4, 2022 00:00:00'
+    ptri5grad: 'June 4, 2022 00:00:00'
 }
 
 
@@ -76,8 +74,18 @@ function thanksgiving(days) {
    gif.src = "images/pusheen_christmasgif.gif";
  }
 
-function ptriEnd(days) {
+  //created the func for christmas and added a new gif
+  function valentines(days) {
+   
+    let page = document.querySelector('body')
+    page.setAttribute("style", "background-color: #ffe3f4;")
+    
+    //add gif
+    let gif = document.getElementById("displayImg")
+    gif.src = "images/pusheen_valentines.gif";
+  }
 
+function ptriEnd(days) {
   //check to see if today is the holiday. If so, say that it is.
   if(days === 0){
     document.getElementById("countdown").innerHTML = "Today is PTRI 5's graduation day!"
@@ -107,8 +115,8 @@ function save_Holiday(selectedDay){
   //update status to let user know options were saved.
   function(){
     let status = document.getElementById('status');
-    status.textContent= 'Countdown holiday changed to ' + selectedDay + "!";
-  }); 
+    status.textContent= 'Countdown holiday changed!';
+  });
 }
 
 //restores select box using the preferences stored in chrome.storage.
@@ -117,25 +125,15 @@ function restore_options(){
     currentHoliday: 'Halloween'
   }, function(items){
     document.getElementById('holidaySelection').value = items.currentHoliday;
+    loadPage(document.getElementById('holidaySelection').value)
   })
 }
 
-//When the page is loaded, the last selection is restored in the selection box
-document.addEventListener('DOMContentLoaded', restore_options)
-
-//when the save button is clicked, the selection is stored in chrome's storage
-document.getElementById('save').addEventListener('click', function(event) {
-  event.preventDefault();
-  const holiday = document.getElementById('holidaySelection').value;
-  console.log(holiday);
-  save_Holiday(holiday);
-  //selectedHoliday = holiday;
-})
 
 //actual loading of the page based on which holiday is selected
-function loadPage(selectedHoliday){
+function loadPage(holiday){
   // if value in chrom storage, set selectedHoliday to that value
-  selectedHoliday = "Thanksgiving"
+  selectedHoliday = holiday;
   // else use default value
 
   if(selectedHoliday === 'Halloween'){
@@ -147,9 +145,21 @@ function loadPage(selectedHoliday){
   if(selectedHoliday === 'Christmas'){
     christmas(dayCounter(selectedHoliday));
   }
-  if(selectedHoliday === 'ptriGrad'){
+  if(selectedHoliday === 'ptri5grad'){
     ptriEnd(dayCounter(selectedHoliday));
   }
+  if(selectedHoliday === "Valentine's Day"){
+    valentines(dayCounter(selectedHoliday));
+  }
 }
+//when the save button is clicked, the selection is stored in chrome's storage
+document.getElementById('save').addEventListener('click', function(event) {
+  event.preventDefault();
+  const holiday = document.getElementById('holidaySelection').value;
+  console.log(holiday);
+  save_Holiday(holiday);
+})
 
-loadPage();
+//When the page is loaded, the last selection is restored in the selection box
+document.addEventListener('DOMContentLoaded', restore_options)
+
