@@ -10,7 +10,7 @@ const holidays = {
     Halloween: 'October 31, ' + currentYear +' 00:00:00',
     Thanksgiving: 'November 25, 2021 00:00:00',
     Christmas: 'December 25, ' + currentYear +' 00:00:00',
-    ptri5grad: 'June 4, 2022 00:00:00'
+    "PTRI 5's Graduation": 'June 4, 2022 00:00:00'
 }
 
 
@@ -27,10 +27,18 @@ function dayCounter(selectedHoliday){
  
   //check to see if holiday has passed yet
     //if so, count down to holiday of next year
-  if(days < 0){
-    days += 365
-  }
-  
+    let leapYear = false;
+
+    if (countDownDate.getFullYear() % 4 === 3) {
+      leapYear = true; 
+    }
+    //check to see if holiday has passed yet
+      //if so, count down to holiday of next year
+    if(days < 0 && leapYear === false){
+      days += 365
+    } else if (days < 0 && leapYear === true) {
+      days += 366
+    }  
   //check to see if today is holiday. If so, say that it is.
     if(days === 0){
       document.getElementById("countdown").innerHTML = "Today is " + selectedHoliday + "!"
@@ -86,14 +94,7 @@ function thanksgiving(days) {
   }
 
 function ptriEnd(days) {
-  //check to see if today is the holiday. If so, say that it is.
-  if(days === 0){
-    document.getElementById("countdown").innerHTML = "Today is PTRI 5's graduation day!"
-  }else{
-    // Display the result in the element with id="demo"
-  document.getElementById("countdown").innerHTML = days + " days until " + "PTRI 5's graduation!";
-  }
-  
+
   let page = document.querySelector('body')
   page.setAttribute("style", "background-color: #e8dcfa;")
   
@@ -145,7 +146,7 @@ function loadPage(holiday){
   if(selectedHoliday === 'Christmas'){
     christmas(dayCounter(selectedHoliday));
   }
-  if(selectedHoliday === 'ptri5grad'){
+  if(selectedHoliday === "PTRI 5's Graduation"){
     ptriEnd(dayCounter(selectedHoliday));
   }
   if(selectedHoliday === "Valentine's Day"){
@@ -162,4 +163,3 @@ document.getElementById('save').addEventListener('click', function(event) {
 
 //When the page is loaded, the last selection is restored in the selection box
 document.addEventListener('DOMContentLoaded', restore_options)
-
