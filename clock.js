@@ -8,11 +8,12 @@ const nextYear = currentYear + 1;
 const holidays = {
     halloween: 'October 31, ' + currentYear +' 00:00:00',
     thanksgiving: 'November 25, 2021 00:00:00',
-    christmas: 'December 25, 2021 00:00:00'
+    christmas: 'December 25, ' + currentYear +' 00:00:00',
+    ptriGrad: 'June 4, 2022 00:00:00'
 }
 
   //set value of selected holiday
-  let selectedHoliday = holidays['thanksgiving']
+  let selectedHoliday = holidays['ptriGrad']
   
   //set a parameter for date you want to countdown towards
   let countDownDate = new Date(selectedHoliday);
@@ -90,6 +91,27 @@ function thanksgiving(days) {
    let gif = document.getElementById("displayImg")
    gif.src = "images/pusheen_christmasgif.gif";
  }
+
+function ptriEnd(days) {
+
+  //check to see if today is the holiday. If so, say that it is.
+  if(days === 0){
+    document.getElementById("countdown").innerHTML = "Today is PTRI 5's graduation day!"
+  }else{
+    // Display the result in the element with id="demo"
+  document.getElementById("countdown").innerHTML = days + " days until " + "PTRI 5's graduation!";
+  }
+  
+  let page = document.querySelector('body')
+  page.setAttribute("style", "background-color: #e8dcfa;")
+  
+  //add gif
+  let gif = document.getElementById("displayImg")
+  gif.src = "images/pusheen_types.gif";
+  gif.style.width = '50%';
+  gif.style.height = '50%';
+}
+
  
  //load the page
-thanksgiving(days);
+ptriEnd(days);

@@ -1,7 +1,9 @@
 div{
     text-align: center;
+    margin: 40px;
 }
 
 #displayImg{
     height: 500px;
+    margin: 80px;
 }
