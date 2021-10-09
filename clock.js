@@ -8,7 +8,7 @@ const nextYear = currentYear + 1;
 const holidays = {
     "Valentine's Day": 'February 14, ' + currentYear +' 00:00:00',
     Halloween: 'October 31, ' + currentYear +' 00:00:00',
-    Thanksgiving: 'November 25, 2021 00:00:00',
+    Thanksgiving: 'November 28, 2024 00:00:00',
     Christmas: 'December 25, ' + currentYear +' 00:00:00',
     ptri5grad: 'June 4, 2022 00:00:00'
 }
@@ -25,12 +25,19 @@ function dayCounter(selectedHoliday){
   // Convert milliseconds to days
   let days = Math.floor(distance / (1000 * 60 * 60 * 24)) + 1;
  
+  let leapYear = false;
+  
+  if (countDownDate.getFullYear() % 4 === 3) {
+    leapYear = true; 
+  }
   //check to see if holiday has passed yet
     //if so, count down to holiday of next year
-  if(days < 0){
+  if(days < 0 && leapYear === false){
     days += 365
-  }
-  
+  } else if (days < 0 && leapYear === true) {
+    days += 366
+  }  
+
   //check to see if today is holiday. If so, say that it is.
     if(days === 0){
       document.getElementById("countdown").innerHTML = "Today is " + selectedHoliday + "!"
