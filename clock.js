@@ -1,7 +1,7 @@
 
 //set value of selected holiday
-let selectedHoliday = 'ptriGrad';
-  
+//let selectedHoliday = 'Halloween';
+
 //pick year dynamically
 const today = new Date();
 const currentYear = today.getFullYear()
@@ -9,9 +9,9 @@ const nextYear = currentYear + 1;
 
 //object that contains the holiday options
 const holidays = {
-    halloween: 'October 31, ' + currentYear +' 00:00:00',
-    thanksgiving: 'November 25, 2021 00:00:00',
-    christmas: 'December 25, ' + currentYear +' 00:00:00',
+    Halloween: 'October 31, ' + currentYear +' 00:00:00',
+    Thanksgiving: 'November 25, 2021 00:00:00',
+    Christmas: 'December 25, ' + currentYear +' 00:00:00',
     ptriGrad: 'June 4, 2022 00:00:00'
 }
 
@@ -32,20 +32,20 @@ function dayCounter(selectedHoliday){
   if(days < 0){
     days += 365
   }
+  
+  //check to see if today is holiday. If so, say that it is.
+    if(days === 0){
+      document.getElementById("countdown").innerHTML = "Today is " + selectedHoliday + "!"
+    }else{
+      // Display the result in the element with id="demo"
+    document.getElementById("countdown").innerHTML = days + " days until " + selectedHoliday + "!";
+    }
   return days;
   }
   
 
 function halloween(days) {
 
-  //check to see if today is halloween. If so, say that it's halloween.
-  if(days === 0){
-    document.getElementById("countdown").innerHTML = "Today is Halloween!"
-  }else{
-    // Display the result in the element with id="demo"
-  document.getElementById("countdown").innerHTML = days + " days until " + "Halloween!";
-  }
-  
   let page = document.querySelector('body')
   page.setAttribute("style", "background-color: #fcd2a4")
   
@@ -57,20 +57,6 @@ function halloween(days) {
 //created the same func for thanksgiving and added a new gif
 function thanksgiving(days) {
 
-   //check to see if Thanksgiving has passed yet
-     //if so, count down to Thanksgiving of next year
-   if(days < 0){
-     days += 365
-   }
-   
-   //check to see if today is Thanksgiving. If so, say that it's Thanksgiving.
-   if(days === 0){
-     document.getElementById("countdown").innerHTML = "Today is Thanksgiving!"
-   }else{
-     // Display the result in the element with id="demo"
-   document.getElementById("countdown").innerHTML = days + " days until " + "Thanksgiving!";
-   }
-   
    let page = document.querySelector('body')
    page.setAttribute("style", "background-color: #faefa5;")
    
@@ -81,14 +67,6 @@ function thanksgiving(days) {
  
  //created the func for christmas and added a new gif
  function christmas(days) {
-
-   //check to see if today is christmas. If so, say that it's halloween.
-   if(days === 0){
-     document.getElementById("countdown").innerHTML = "Today is Christmas!"
-   }else{
-     // Display the result in the element with id="demo"
-   document.getElementById("countdown").innerHTML = days + " days until " + "Christmas!";
-   }
    
    let page = document.querySelector('body')
    page.setAttribute("style", "background-color: #bdf4ff;")
@@ -118,19 +96,18 @@ function ptriEnd(days) {
   gif.style.height = '50%';
 }
 
+//let chosenHoliday = document.getElementById('holidaySelection').value;
 //allows users to change which holiday is selected for the countdown
-function save_Holiday(){
-
-  let chosenHoliday = document.getElementById('holidaySelection').value;
+function save_Holiday(selectedDay){
   
   chrome.storage.sync.set({
-    currentHoliday: chosenHoliday
+    currentHoliday: selectedDay
   },
   
   //update status to let user know options were saved.
   function(){
     let status = document.getElementById('status');
-    status.textContent= 'Countdown holiday changed to ' + chosenHoliday + "!";
+    status.textContent= 'Countdown holiday changed to ' + selectedDay + "!";
   }); 
 }
 
@@ -143,34 +120,31 @@ function restore_options(){
   })
 }
 
-// function checkState() {
-//   let chosenHoliday = document.getElementById('holidaySelection').value;
-//   if (chosenHoliday === 'halloween') {
-//     return halloween(dayValue);
-//   } else if (chosenHoliday === 'thanksgiving') {
-//     return thanksgiving(days);
-//   } else if (chosenHoliday === 'christmas') {
-//     return christmas(days);
-//   } else if (chosenHoliday === 'ptriGrad') {
-//     return ptriEnd(days);
-// }
-// }
-
 //When the page is loaded, the last selection is restored in the selection box
 document.addEventListener('DOMContentLoaded', restore_options)
 
 //when the save button is clicked, the selection is stored in chrome's storage
-document.getElementById('save').addEventListener('click', save_Holiday);
+document.getElementById('save').addEventListener('click', function(event) {
+  event.preventDefault();
+  const holiday = document.getElementById('holidaySelection').value;
+  console.log(holiday);
+  save_Holiday(holiday);
+  //selectedHoliday = holiday;
+})
 
 //actual loading of the page based on which holiday is selected
-function loadPage(){
-  if(selectedHoliday === 'halloween'){
+function loadPage(selectedHoliday){
+  // if value in chrom storage, set selectedHoliday to that value
+  selectedHoliday = "Thanksgiving"
+  // else use default value
+
+  if(selectedHoliday === 'Halloween'){
     halloween(dayCounter(selectedHoliday));
   }
-  if(selectedHoliday === 'thanksgiving'){
+  if(selectedHoliday === 'Thanksgiving'){
     thanksgiving(dayCounter(selectedHoliday));
   }
-  if(selectedHoliday === 'christmas'){
+  if(selectedHoliday === 'Christmas'){
     christmas(dayCounter(selectedHoliday));
   }
   if(selectedHoliday === 'ptriGrad'){
