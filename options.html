@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="button.css">
+    <link rel="stylesheet" href="optionsStyle.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
   </head>
   <body>
-    <div id="clock">
-      <h1 id = "countdown"></h1>
-      <img id = "displayImg"></img>
+    <!--creates a dropdown menu to select the holiday-->
+    <select id = "holidaySelection">
+        <option value = "Halloween">Halloween</option>
+        <option value = "Thanksgiving">Thanksgiving</option>
+        <option value = "Christmas">Christmas</option>
+    </select>
+
+
+    <div id = "status"></div>
+    <button id = "save">Save</button>
+
+    <div id = "test"></div>
+
+    <!-- <div id="buttonDiv">
     </div>
-    <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-    <script src="clock.js"></script>
+    <div>
+    </div> -->
   </body>
+  <script src="options.js"></script>
+  <script src = "clock.js"></script>
 </html>
