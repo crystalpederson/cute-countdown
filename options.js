@@ -24,8 +24,21 @@ function restore_options(){
   })
 }
 
+function checkState() {
+  let chosenHoliday = document.getElementById('holidaySelection').value;
+  if (chosenHoliday === 'halloween') {
+    return halloween(dayValue);
+  } else if (chosenHoliday === 'thanksgiving') {
+    return thanksgiving(days);
+  } else if (chosenHoliday === 'christmas') {
+    return christmas(days);
+  } else if (chosenHoliday === 'ptriGrad') {
+    return ptriEnd(days);
+}
+}
+
 document.addEventListener('DOMContentLoaded', restore_options)
-document.getElementById('save').addEventListener('click', save_Holiday);
+document.getElementById('save').addEventListener('click', save_Holiday, checkState);
 
 
 // let page = document.getElementById("buttonDiv");
@@ -37,8 +50,8 @@ document.getElementById('save').addEventListener('click', save_Holiday);
 // // Reacts to a button click by marking the selected button and saving the selection
 // function handleButtonClick(event) {
 //   // Remove styling from the previously selected color
-//   let current = event.target.parentElement.querySelector(
-//     `.${selectedClassName}`
+  // let current = event.target.parentElement.querySelector(
+  //   `.${selectedClassName}`
 //   );
 //   if (current && current !== event.target) {
 //     current.classList.remove(selectedClassName);

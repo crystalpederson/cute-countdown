@@ -3,10 +3,6 @@
   "description": "Displays a countdown to a holiday",
   "version": "1.0",
   "manifest_version": 3,
-  "background": {
-    "scripts": ["background.js", "clock.js"],
-    "persistent": false
-  },
   "permissions": ["storage", "activeTab", "scripting", "tabs"],
 
   
@@ -14,9 +10,7 @@
     "newtab": "calendar.html"
   },
 
-
   "action": {
-    "default_popup": "popup.html",
     "default_title": "Select Holiday",
     "default_icon": {
       "16": "/images/calendar_16.png",

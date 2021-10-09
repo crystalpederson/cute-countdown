@@ -1,9 +1,35 @@
 div{
     text-align: center;
-    margin: 40px;
 }
 
 #displayImg{
     height: 500px;
     margin: 80px;
+}
+
+#save{
+    margin-top: 10px;
+    font-family: 'Varela Round', sans-serif;
+    font-size: medium;
+    background-color: white;
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    background-color: pink;
+}
+
+#save:active {background: rgb(255, 147, 165);}
+
+#status{
+    margin-top: 10px;
+    font-size: medium;
+}
+
+select{
+    font-size: medium;
+    height: 30px;
+    width: 200px;
+    border-radius: 5px;
+    border: none;
 }
